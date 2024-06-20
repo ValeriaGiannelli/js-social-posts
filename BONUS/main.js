@@ -58,6 +58,8 @@ const posts = [
 
 console.log(posts);
 
+console.log(posts[0].author.name[0]);
+
 // convertire la data
 const newDate = posts.map((post)=>{
     return {...post,
@@ -75,7 +77,7 @@ const containerPost = document.getElementById("container");
 console.log(containerPost);
 
 // per ogni elemento dell'array vado a creare un html che inserirò nel container
-newDate.forEach((singlePost, index)=>{
+newDate.forEach((singlePost)=>{
     let post = `
         <div class="post">
             <div class="post__header">
@@ -125,17 +127,29 @@ const postLiked = [];
 likeButton.forEach((singleLikeButton, index)=>{
     singleLikeButton.addEventListener("click",
         function(){
-            this.classList.add("like-button--liked");// "Mi piace" cambia colore
-            // prendi il valore del nome likes relativo a questo like e aumentalo di 1
-            posts[index].likes++;
+            if(singleLikeButton.classList.contains("like-button--liked")){
+                singleLikeButton.classList.remove("like-button--liked");// "Mi piace" cambia colore
+                // prendi il valore del nome likes relativo a questo like e aumentalo di 1
+                posts[index].likes--;
+                 // stampa in pagina il nuovo valore dei likes
+                const likeCounter = document.querySelectorAll(".js-likes-counter")[index];
+                likeCounter.innerHTML = `${posts[index].likes}`;
+                // togli il post in un array nuovo
+                postLiked.pop(posts[index].id);
+                console.log(postLiked);
+            } else {
+                singleLikeButton.classList.add("like-button--liked");// "Mi piace" cambia colore
+                // prendi il valore del nome likes relativo a questo like e aumentalo di 1
+                posts[index].likes++;
+                 // stampa in pagina il nuovo valore dei likes
+                const likeCounter = document.querySelectorAll(".js-likes-counter")[index];
+                likeCounter.innerHTML = `${posts[index].likes}`;
+                // salva il post in un array nuovo
+                postLiked.push(posts[index].id);
+                console.log(postLiked);
+            }         
             console.log(posts[index].likes);
-            // stampa in pagina il nuovo valore dei likes
-            const likeCounter = document.querySelectorAll(".js-likes-counter")[index];
-            likeCounter.innerHTML = `${posts[index].likes}`;
 
-            // salva il post in un array nuovo
-            postLiked.push(posts[index]);
-            console.log(postLiked);
         }
     )
 });
