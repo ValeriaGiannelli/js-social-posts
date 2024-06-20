@@ -66,7 +66,7 @@ const containerPost = document.getElementById("container");
 console.log(containerPost);
 
 // per ogni elemento dell'array vado a creare un html che inserirò nel container
-posts.forEach((singlePost)=>{
+posts.forEach((singlePost, index)=>{
     let post = `
         <div class="post">
             <div class="post__header">
@@ -101,48 +101,34 @@ posts.forEach((singlePost)=>{
         `;
 
     containerPost.innerHTML += post;
+
 });
 
 
 // Milestone 3 - Se clicchiamo sul tasto “Mi Piace” cambiamo il colore al testo del bottone e incrementiamo il counter dei likes relativo. Salviamo in un secondo array gli id dei post ai quali abbiamo messo il like.
-
-
-// clicco sul bottone:
-// devo prendere tutti i bottoni in pagina
 const likeButton = document.querySelectorAll(".like-button");
 console.log(likeButton);
 
-for(i = 0; i < likeButton.length; i++){
-    console.log("questo è il bottone del like:", likeButton[i]);
-   likeButton[i].addEventListener("click",
-    function(){
-        likeButton[i].classList.add("like-button--liked");
-        // posts[i].likes++;
-    }
-   );   
-}
 
-// prendo tutti i counters
-// const likeCounter = document.querySelectorAll(".js-likes-counter");
-// console.log(likeCounter);
+const postLiked = [];
 
-let click = 0;
 // per ognunno di questi devo fare un eventListener al click
-// likeButton.forEach((singleLikeButton)=>{
-//     singleLikeButton.addEventListener("click",
-//         function(){
-//             this.classList.add("like-button--liked");// "Mi piace" cambia colore
-//             // prendi il valore del nome likes relativo a questo like e aumentalo di 1
-//             posts.likes++;
-//             console.log(posts.likes);
-//         }
-//     )
-// });
+likeButton.forEach((singleLikeButton, index)=>{
+    singleLikeButton.addEventListener("click",
+        function(){
+            this.classList.add("like-button--liked");// "Mi piace" cambia colore
+            // prendi il valore del nome likes relativo a questo like e aumentalo di 1
+            posts[index].likes++;
+            console.log(posts[index].likes);
+            // stampa in pagina il nuovo valore dei likes
+            const likeCounter = document.querySelectorAll(".js-likes-counter")[index];
+            likeCounter.innerHTML = `${posts[index].likes}`;
+
+            // salva il post in un array nuovo
+            postLiked.push(posts[index]);
+            console.log(postLiked);
+        }
+    )
+});
 
 
-// if(singleLikeButton.dataset.postid === )
-    
-// al click del mi piace il counter incrementa di 1:
-// se clicco sul like che ha il numero di data-postid = all'id del counter -> il singlePost.likes ++;
-
-    // salvo su un secondo array solo post con mi piace (filter -> if bottone così salvali)
