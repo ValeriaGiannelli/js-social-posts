@@ -112,21 +112,33 @@ posts.forEach((singlePost)=>{
 const likeButton = document.querySelectorAll(".like-button");
 console.log(likeButton);
 
+for(i = 0; i < likeButton.length; i++){
+    console.log("questo è il bottone del like:", likeButton[i]);
+   likeButton[i].addEventListener("click",
+    function(){
+        likeButton[i].classList.add("like-button--liked");
+        // posts[i].likes++;
+    }
+   );   
+}
+
 // prendo tutti i counters
-const likeCounter = document.querySelectorAll(".js-likes-counter");
-console.log(likeCounter);
+// const likeCounter = document.querySelectorAll(".js-likes-counter");
+// console.log(likeCounter);
 
 let click = 0;
 // per ognunno di questi devo fare un eventListener al click
-likeButton.forEach((singleLikeButton)=>{
-    singleLikeButton.addEventListener("click",
-        function(){
-            this.classList.add("like-button--liked");// "Mi piace" cambia colore
-            // prendi il valore del nome likes relativo a questo like e aumentalo di 1
-            click =  + 1;
-        }
-    )
-});
+// likeButton.forEach((singleLikeButton)=>{
+//     singleLikeButton.addEventListener("click",
+//         function(){
+//             this.classList.add("like-button--liked");// "Mi piace" cambia colore
+//             // prendi il valore del nome likes relativo a questo like e aumentalo di 1
+//             posts.likes++;
+//             console.log(posts.likes);
+//         }
+//     )
+// });
+
 
 // if(singleLikeButton.dataset.postid === )
     
