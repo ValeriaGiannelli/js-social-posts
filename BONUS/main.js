@@ -58,6 +58,15 @@ const posts = [
 
 console.log(posts);
 
+// convertire la data
+const newDate = posts.map((post)=>{
+    return {...post,
+        created : post.created.split('-').reverse().join('-')
+    }
+})
+
+
+console.log(newDate);
 
 // per ogni elemento del nostro array devo creare un elemento HTML da mettere in pagina:
 
@@ -66,7 +75,7 @@ const containerPost = document.getElementById("container");
 console.log(containerPost);
 
 // per ogni elemento dell'array vado a creare un html che inserirò nel container
-posts.forEach((singlePost, index)=>{
+newDate.forEach((singlePost, index)=>{
     let post = `
         <div class="post">
             <div class="post__header">
