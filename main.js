@@ -125,10 +125,10 @@ likeButton.forEach((singleLikeButton, index)=>{
             likeCounter.innerHTML = `${posts[index].likes}`;
 
             // salva il post in un array nuovo
-            postLiked.push(posts[index]);
+            postLiked.push(posts[index].id);
             console.log(postLiked);
         }
     )
 });
 
-
+console.log(postLiked);
