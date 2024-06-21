@@ -87,7 +87,7 @@ posts.forEach((singlePost, index)=>{
             <div class="post__footer">
                 <div class="likes js-likes">
                     <div class="likes__cta">
-                        <a class="like-button  js-like-button" data-postid="${singlePost.id}">
+                        <a class="like-button  js-like-button" href="#" data-postid="${singlePost.id}">
                             <i class="like-button__icon fas fa-thumbs-up" aria-hidden="true"></i>
                             <span class="like-button__label">Mi Piace</span>
                         </a>
@@ -115,7 +115,9 @@ const postLiked = [];
 // per ognunno di questi devo fare un eventListener al click
 likeButton.forEach((singleLikeButton, index)=>{
     singleLikeButton.addEventListener("click",
-        function(){
+        function(e){
+            // previene che al click li toglie il comportamento di base (l'href)
+            e.preventDefault();
             this.classList.add("like-button--liked");// "Mi piace" cambia colore
             // prendi il valore del nome likes relativo a questo like e aumentalo di 1
             posts[index].likes++;
